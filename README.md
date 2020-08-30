@@ -4,18 +4,18 @@
 
 
 
+## installing
+
+1. install requrements.
+1. rename `config.py.sample` file to `config.py` and fill it with your own information.
+1. enjoy.
+
+
 
 ## requirements
 
-[discord.py](https://pypi.org/project/discord.py/)
+1. [discord.py](https://pypi.org/project/discord.py/)
+* **installing**:
+  * python -m pip install -U discord.py
 
-
--> **installing**:
-
-Linux/macOS:
-python3 -m pip install -U discord.py
-
-Windows:
-py -3 -m pip install -U discord.py
-
--> [**documentation**](https://discordpy.readthedocs.io/en/latest/)
+* [**documentation**](https://discordpy.readthedocs.io/en/latest/)
