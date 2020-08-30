@@ -4,5 +4,7 @@
 #insert your information here then rename this file to "configs.py"
 
 #replace your token here
+#some thing like this : token='N7A1mZE3MDQzOTg0OTI0NzM0.dfq9NA.Ul_KSiU6ret9hYdkrAJtX34W-qe'
 token=''
- 
+
+guild=''
