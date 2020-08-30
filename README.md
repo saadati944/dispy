@@ -4,7 +4,7 @@
 
 
 
-## installing
+## how to use
 
 1. install requrements.
 1. rename `config.py.sample` file to `config.py` and fill it with your own information.
