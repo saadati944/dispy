@@ -1,0 +1,8 @@
+#this is the configs sample file.
+#lines started with a # will be ignored.
+
+#insert your information here then rename this file to "configs.py"
+
+#replace your token here
+token=''
+ 
