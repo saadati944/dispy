@@ -9,7 +9,13 @@
 
 [discord.py](https://pypi.org/project/discord.py/)
 
-#### Linux/macOS
+
+-> **installing**:
+
+Linux/macOS:
 python3 -m pip install -U discord.py
-#### Windows
+
+Windows:
 py -3 -m pip install -U discord.py
+
+-> [**documentation**](https://discordpy.readthedocs.io/en/latest/)
