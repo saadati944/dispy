@@ -3,18 +3,19 @@ import asyncio
 import config
 from discord.ext import commands
 
-
+members=[]
 client = discord.Client()
 
 @client.event
 async def on_ready():
+    global members
     for guild in client.guilds:
         if guild.name==config.guild:
             pass#break
         print(f'{client.user} is connected to the following guild:\n'
             f'{guild.name}(id: {guild.id})\n')
-    members = '\n - '.join([member.name for member in guild.members])
-    print(f'Guild Members:\n - {members}')
+    members = [member.name for member in guild.members]
+    print('Guild Members:\n - '+'\n - '.join(members))
     #await guild.members[0].create_dm()
     #await guild.members[0].dm_channel.send(f'Hi {guild.members[0]}, welcome to my Discord server!')
 
@@ -33,5 +34,6 @@ async def on_message(message):
     else :
         response = 'hello '+message.author.name+'\n you have sent : '+message.content
         await message.channel.send(response)
+        await message.channel.send(file=discord.File(config.image0))
 
 client.run(config.token)
