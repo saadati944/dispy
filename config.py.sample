@@ -3,6 +3,10 @@
 
 #insert your information here then rename this file to "configs.py"
 
-#replace your token here
+#replace your token and guild here here
 token=''
- 
+guild=''
+
+
+#a little image to send users if they send a message
+image0=''
