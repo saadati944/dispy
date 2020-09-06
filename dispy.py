@@ -1,6 +1,7 @@
 import discord
 import asyncio
 import config
+import data
 from discord.ext import commands
 
 members=[]
@@ -26,14 +27,17 @@ async def on_member_join(member):
     await member.dm_channel.send(f'Hi {member.name}, welcome to my Discord server!')
 
 
-
 @client.event
 async def on_message(message):
     if message.author == client.user:
         return
-    else :
-        response = 'hello '+message.author.name+'\n you have sent : '+message.content
-        await message.channel.send(response)
-        await message.channel.send(file=discord.File(config.image0))
+    if message.content[0]=='$' and not ' ' in message.content:
+        await message.channel.send(data.get_static_data(message.content[1:]))
+        return
+    response = 'hello '+message.author.name+'\n you have sent : '+message.content
+    await message.channel.send(response)
+    await message.channel.send(file=discord.File(config.image0))
+
+
 
 client.run(config.token)
