@@ -14,3 +14,5 @@ guild=''
 image0=''
 
 
+#path to static datas (static data mean static strings like help message. binary statics are in static_files)
+static_data="static_data"
