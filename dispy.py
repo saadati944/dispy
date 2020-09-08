@@ -34,10 +34,39 @@ async def on_message(message):
     if message.content[0]=='$' and not ' ' in message.content:
         await message.channel.send(data.get_static_data(message.content[1:]))
         return
+    if message.content=='test':
+        res='test message'
+        await message.channel.send(res, embed=imageembed(config.image0))
+        return
+    
+    '''
     response = 'hello '+message.author.name+'\n you have sent : '+message.content
     await message.channel.send(response)
     await message.channel.send(file=discord.File(config.image0))
+    '''
 
+#files and mentions
+def file(path):
+    return discord.File(path)
+def imageembed(url):
+    return discord.Embed().set_image(url=url)
+
+#formating functions :
+def bold(mes):
+    return '**'+mes+'**'
+def italic(mes):
+    return '*'+mes+'*'
+def underline(mes):
+    return '__'+mes+'__'
+def strike(mes):
+    return '~~'+mes+'~~'
+def code(mes):
+    if '\n' in mes:
+        return ' `'+mes+'` '
+    return ' ```'+mes+'``` '
+def quote(mes):
+    mes.replace('\n','\n> ')
+    return '> '+mes
 
 
 client.run(config.token)
