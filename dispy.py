@@ -3,6 +3,7 @@ import asyncio
 import config
 import data
 from discord.ext import commands
+import os
 
 members=[]
 client = discord.Client()
@@ -29,10 +30,12 @@ async def on_member_join(member):
 
 @client.event
 async def on_message(message):
+    #return if message is from bot it self
     if message.author == client.user:
         return
+    #static messages
     if message.content[0]=='$' and not ' ' in message.content:
-        await message.channel.send(data.get_static_data(message.content[1:]))
+        await sendStaticMessages(message.channel,message.content[1:],True)
         return
     if message.content=='test':
         res='test message'
@@ -45,9 +48,46 @@ async def on_message(message):
     await message.channel.send(file=discord.File(config.image0))
     '''
 
+#ch is discord.Channel
+#name is the name of static message file
+async def sendStaticMessages(ch,name,user=False):
+    mescontent=data.get_static_data(name,user)
+    #don't send anything if message content is empty.
+    if len(mescontent)==0:
+        return
+    #if message content starts with a ! , don't apply formatting.
+    if mescontent[0][0]=='!':
+        mescontent[0]=mescontent[0][1:]
+        await ch.send(''.join(mescontent))
+        return
+    #don't apply formatting if lines are fewer than 6
+    if len(mescontent)<6:
+        await ch.send(''.join(mescontent))
+        return
+    imglink=''
+    nextmes=''
+    #first 5 lines are reserved for formatting.
+    for i in range(5):
+        l0=mescontent.pop(0)
+        if l0[-1]=='\n':
+            l0=l0[:-1]
+        if l0.startswith('image:'):
+            imglink=l0[6:]
+        elif l0.startswith('next:'):
+            nextmes=l0[5:]
+    if imglink=='':
+        await ch.send('\n'.join(mescontent))
+    elif os.path.exists(imglink):
+        await ch.send('\n'.join(mescontent),file=file(imglink))
+    else:
+        await ch.send('\n'.join(mescontent),embed=imageembed(imglink))
+    if not nextmes=='':
+        await sendStaticMessages(ch,nextmes)
+
+
 #files and mentions
-def file(path):
-    return discord.File(path)
+def file(pth):
+    return discord.File(pth)
 def imageembed(url):
     return discord.Embed().set_image(url=url)
 
